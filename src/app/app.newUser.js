@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var app_globalData_1 = require("./app.globalData");
 var NewUserComponent = (function () {
@@ -51,22 +52,22 @@ var NewUserComponent = (function () {
             _this.showMealViewEvent.emit('');
         };
     }
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], NewUserComponent.prototype, "showSignupEvent", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], NewUserComponent.prototype, "showMealViewEvent", void 0);
+    NewUserComponent = __decorate([
+        core_1.Component({
+            selector: 'mt-newuser',
+            template: "    \n  <div class=\"logPanel\">\n  <div class=\"logFrame\">\n    <div class=\"logTitle\">New User</div>\n    <div class=\"logWords\">New User Name <span>{{unError}}</span></div>\n    <div class=\"logWords\"><input type=\"text\" [(ngModel)]=\"userName\" (keyup.enter)=\"submitForm()\" autofocus /></div>\n    <div class=\"logWords\">New Password <span>{{pwError}}</span></div>\n    <div class=\"logWords\"><input type=\"password\" [(ngModel)]=\"password\" (keyup.enter)=\"submitForm()\"/></div>\n    <div class=\"logWords\">Verify Password <span>{{spError}}</span></div>\n    <div class=\"logWords\"><input type=\"password\" [(ngModel)]=\"secondPassword\" (keyup.enter)=\"submitForm()\"/></div>\n    <div class=\"logWords\">\n        <button class=\"goButton\" (click)=\"submitForm()\">Submit</button>\n        <button class=\"backButton\" (click)=\"cancelForm()\">Cancel</button>\n    </div>\n  </div>\n  </div>\n  "
+        }),
+        __metadata("design:paramtypes", [app_globalData_1.GlobalDataService])
+    ], NewUserComponent);
     return NewUserComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], NewUserComponent.prototype, "showSignupEvent", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], NewUserComponent.prototype, "showMealViewEvent", void 0);
-NewUserComponent = __decorate([
-    core_1.Component({
-        selector: 'mt-newuser',
-        template: "    \n  <div class=\"logPanel\">\n  <div class=\"logFrame\">\n    <div class=\"logTitle\">New User</div>\n    <div class=\"logWords\">New User Name <span>{{unError}}</span></div>\n    <div class=\"logWords\"><input type=\"text\" [(ngModel)]=\"userName\" (keyup.enter)=\"submitForm()\" autofocus /></div>\n    <div class=\"logWords\">New Password <span>{{pwError}}</span></div>\n    <div class=\"logWords\"><input type=\"password\" [(ngModel)]=\"password\" (keyup.enter)=\"submitForm()\"/></div>\n    <div class=\"logWords\">Verify Password <span>{{spError}}</span></div>\n    <div class=\"logWords\"><input type=\"password\" [(ngModel)]=\"secondPassword\" (keyup.enter)=\"submitForm()\"/></div>\n    <div class=\"logWords\">\n        <button class=\"goButton\" (click)=\"submitForm()\">Submit</button>\n        <button class=\"backButton\" (click)=\"cancelForm()\">Cancel</button>\n    </div>\n  </div>\n  </div>\n  "
-    }),
-    __metadata("design:paramtypes", [app_globalData_1.GlobalDataService])
-], NewUserComponent);
 exports.NewUserComponent = NewUserComponent;
 //# sourceMappingURL=app.newUser.js.map

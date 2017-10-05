@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var GlobalDataService = (function () {
     function GlobalDataService() {
@@ -92,11 +93,11 @@ var GlobalDataService = (function () {
         this.addMeal("user2", "Steak", 700, new Date("2017-10-01T18:00:00"));
         this.addMeal("user2", "Fish and Chips", 1000, new Date("2017-10-02T19:00:00"));
     }
+    GlobalDataService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [])
+    ], GlobalDataService);
     return GlobalDataService;
 }());
-GlobalDataService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [])
-], GlobalDataService);
 exports.GlobalDataService = GlobalDataService;
 //# sourceMappingURL=app.globalData.js.map
