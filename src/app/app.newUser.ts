@@ -65,7 +65,7 @@ export class NewUserComponent
             return;
         }
 
-        this.globalData.userMap.set(this.userName, {pw: this.password});
+        this.globalData.userMap.set(this.userName, {pw: this.password, totalCalories: null});
         this.globalData.currentUser = this.userName;
         this.showMealViewEvent.emit('');
     }

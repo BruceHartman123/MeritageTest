@@ -22,7 +22,7 @@ import { GlobalDataService } from './app.globalData';
             <div [ngClass]="{'col-md-5': isUserAdmin == false, 'col-md-3': isUserAdmin == true}">Time</div>
             <div class="col-md-1">
                 <i class="fa fa-filter" (click)="showFilterForm = true" title="Filter Meals"></i>
-                <i *ngIf="isUserAdmin == false" class="fa fa-plus" (click)="addMeal()" title="Add New Meal"></i>
+                <i class="fa fa-plus" (click)="addMeal()" title="Add New Meal"></i>
             </div>
         </div>
         <div *ngIf="mealList?.length == 0" class="mealRow row">(No Meals to Show)</div>
@@ -30,7 +30,7 @@ import { GlobalDataService } from './app.globalData';
             <div *ngFor="let meal of mealList; let i = index" class="mealRow row">
                 <div *ngIf="isUserAdmin == true" class="col-md-2">{{meal.userName}}</div>
                 <div class="col-md-4">{{meal.description}}</div>
-                <div class="col-md-2" [ngClass]="{'calorieOK': !meal.underDaily || isUserAdmin, 'calorieNotOK': meal.underDaily && !isUserAdmin}">{{meal.calories}}</div>
+                <div class="col-md-2" [ngClass]="{'calorieOK': !meal.underDaily, 'calorieNotOK': meal.underDaily}">{{meal.calories}}</div>
                 <div [ngClass]="{'col-md-5': isUserAdmin == false, 'col-md-3': isUserAdmin == true}">
                     {{meal.time | date:'h:mm a, MMMM d, yyyy'}}</div>
                 <div class="col-md-1">
@@ -42,7 +42,7 @@ import { GlobalDataService } from './app.globalData';
     </div>
   </div>
   </div>
-  <div *ngIf="isUserAdmin == false" class="mealPanel row">
+  <div class="mealPanel row">
     <div class="totalFrame row">
         <div *ngIf="!showUpdateTotal" class="col-md-6 totalCell">
             Calories Allowed per Day: {{totalCalories}}
@@ -95,34 +95,34 @@ import { GlobalDataService } from './app.globalData';
 })
 export class MealViewComponent  
 {
-    mealList = [];
+    mealList: Array<any> = [];
     isUserAdmin = false;
-    totalCalories = this.globalData.getTotalCalories();
-    updateCalories;
-    modifyPanelTitle;
+    totalCalories = this.globalData.getTotalCalories(this.globalData.currentUser);
+    updateCalories: number;
+    modifyPanelTitle: string;
     
     showUpdateTotal = false;
     showModifyForm = false;
     showFilterForm = false;
     
-    updMealDesc;
-    mdError;
-    updCalories;
-    calError;
-    updTime;
-    timeError;
+    updMealDesc: string;
+    mdError: string;
+    updCalories: number;
+    calError: string;
+    updTime: string;
+    timeError: string;
     
-    filterFromDate;
-    fdfError;
-    filterToDate;
-    tdfError;
-    filterFromTime;
-    ftfError;
-    filterToTime;
-    ttfError;
-    isFilteredView;
+    filterFromDate: string;
+    fdfError: string;
+    filterToDate: string;
+    tdfError: string;
+    filterFromTime: string;
+    ftfError: string;
+    filterToTime: string;
+    ttfError: string;
+    isFilteredView: boolean;
     
-    currentUpdateMeal;
+    currentUpdateMeal: any;
     
     constructor(private globalData: GlobalDataService, private datepipe: DatePipe) { 
         this.mealList = globalData.getMeals();
@@ -146,7 +146,7 @@ export class MealViewComponent
             return;
         }
         
-        if (this.updCalories == null || this.updCalories == "") {
+        if (this.updCalories == null) {
             this.calError = "Please fill in the Calories";
             return;
         }
@@ -162,7 +162,7 @@ export class MealViewComponent
             this.showModifyForm = false;
         }
         else {
-            this.globalData.addMeal(this.globalData.currentUser, this.updMealDesc, this.updCalories, new Date(this.updTime), false);
+            this.globalData.addMeal(this.globalData.currentUser, this.updMealDesc, this.updCalories, new Date(this.updTime));
             this.submitFilterForm();
             this.showModifyForm = false;
         }
@@ -260,10 +260,10 @@ export class MealViewComponent
         this.globalData.setTotalCalories(this.updateCalories);
         this.showUpdateTotal = false; 
         
-        let dailyMap: Map<string, float> = new Map<string, float>();
+        let dailyMap: Map<string, number> = new Map<string, number>();
         
         for (let meal of this.mealList) {
-            let day = this.getDailyMapKey(meal.time);
+            let day = this.getDailyMapKey(meal.userName, meal.time);
             let dayValue = dailyMap.get(day);
             
             if (dayValue == null) {
@@ -275,17 +275,17 @@ export class MealViewComponent
         }
         
         for (let meal of this.mealList) {
-            let dayValue = dailyMap.get(this.getDailyMapKey(meal.time));
+            let dayValue = dailyMap.get(this.getDailyMapKey(meal.userName, meal.time));
             
-            meal.underDaily = (dayValue > this.totalCalories);
+            meal.underDaily = (dayValue > this.globalData.getTotalCalories(meal.userName));
         }
     }
     
-    getDailyMapKey = (date: Date) => {
-        return "" + date.getMonth() + date.getDay() + date.getYear();
+    getDailyMapKey = (userName: string, date: Date) => {
+        return "" + userName + date.getMonth() + date.getDay() + date.getFullYear();
     }
     
-    deleteMeal = (row: integer) => {
+    deleteMeal = (row: number) => {
         this.globalData.deleteMeal(this.mealList[row]);
         this.submitFilterForm();
     }
@@ -299,7 +299,7 @@ export class MealViewComponent
         this.showModifyForm = true;
     }
     
-    modifyMeal = (row: integer) => {
+    modifyMeal = (row: number) => {
         this.modifyPanelTitle = "Update Meal Information";
         this.currentUpdateMeal = this.mealList[row];
         this.updMealDesc = this.currentUpdateMeal.description;

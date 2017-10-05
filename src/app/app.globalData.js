@@ -16,11 +16,8 @@ var GlobalDataService = (function () {
         this.userMap = new Map();
         this.adminUsers = ["user1"];
         this.mealMap = new Map();
-        this.getTotalCalories = function () {
-            if (_this.currentUser) {
-                return _this.userMap.get(_this.currentUser).totalCalories;
-            }
-            return null;
+        this.getTotalCalories = function (user) {
+            return _this.userMap.get(user).totalCalories;
         };
         this.setTotalCalories = function (calories) {
             if (_this.currentUser) {
@@ -36,7 +33,7 @@ var GlobalDataService = (function () {
                 _this.mealMap.set(userName, []);
                 mealArray = _this.mealMap.get(userName);
             }
-            mealArray.push({ userName: userName, description: description, calories: calories, calories: calories, time: time, time: time });
+            mealArray.push({ userName: userName, description: description, calories: calories, time: time });
         };
         this.updateMeal = function (mealObj, description, calories, time) {
             var mealList = _this.mealMap.get(mealObj.userName);
@@ -87,8 +84,8 @@ var GlobalDataService = (function () {
             }
             return filteredMeals;
         };
-        this.userMap.set("user1", { pw: "user1" });
-        this.userMap.set("user2", { pw: "user2" });
+        this.userMap.set("user1", { pw: "user1", totalCalories: null });
+        this.userMap.set("user2", { pw: "user2", totalCalories: null });
         this.addMeal("user1", "Fried Chicken", 800, new Date("2017-10-02T18:00:00"));
         this.addMeal("user1", "Steak", 700, new Date("2017-10-01T19:00:00"));
         this.addMeal("user1", "Pancakes with Syrup", 900, new Date("2017-10-02T08:00:00"));

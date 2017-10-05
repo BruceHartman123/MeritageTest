@@ -46,7 +46,7 @@ var NewUserComponent = (function () {
                 _this.unError = "(This User Name is being used.)";
                 return;
             }
-            _this.globalData.userMap.set(_this.userName, { pw: _this.password });
+            _this.globalData.userMap.set(_this.userName, { pw: _this.password, totalCalories: null });
             _this.globalData.currentUser = _this.userName;
             _this.showMealViewEvent.emit('');
         };

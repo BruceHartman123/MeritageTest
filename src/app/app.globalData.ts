@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 export class GlobalDataService  
 { 
     constructor() {
-        this.userMap.set("user1", {pw: "user1"});
-        this.userMap.set("user2", {pw: "user2"});
+        this.userMap.set("user1", {pw: "user1", totalCalories: null});
+        this.userMap.set("user2", {pw: "user2", totalCalories: null});
         this.addMeal("user1", "Fried Chicken", 800, new Date("2017-10-02T18:00:00"));
         this.addMeal("user1", "Steak", 700, new Date("2017-10-01T19:00:00"));
         this.addMeal("user1", "Pancakes with Syrup", 900, new Date("2017-10-02T08:00:00"));
@@ -15,18 +15,14 @@ export class GlobalDataService
     
     currentUser: string = "";
     
-    userMap: Map<string, {}> = new Map<string, {}>();
+    userMap: Map<string, {pw: string, totalCalories: number}> = new Map<string, {pw: string, totalCalories: number}>();
     
     adminUsers = ["user1"];
     
-    mealMap: Map<string, []> = new Map<string, []>();
+    mealMap: Map<string, any> = new Map<string, any>();
     
-    getTotalCalories = () => {
-        if (this.currentUser) {
-            return this.userMap.get(this.currentUser).totalCalories;
-        }
-        
-        return null;
+    getTotalCalories = (user: string) => {
+        return this.userMap.get(user).totalCalories;
     }
     
     setTotalCalories = (calories: number) => {
@@ -47,10 +43,10 @@ export class GlobalDataService
             mealArray = this.mealMap.get(userName);
         }
         
-        mealArray.push({userName: userName, description: description, calories, calories, time, time});
+        mealArray.push({userName: userName, description: description, calories: calories, time: time});
     }
     
-    updateMeal = (mealObj, description: string, calories: number, time: Date) => {
+    updateMeal = (mealObj: any, description: string, calories: number, time: Date) => {
         let mealList = this.mealMap.get(mealObj.userName);
  
         if (mealList != null && mealList.indexOf(mealObj) >= 0) {
@@ -61,7 +57,7 @@ export class GlobalDataService
         }
     }
     
-    deleteMeal = (mealObj) => {
+    deleteMeal = (mealObj: any) => {
         let mealList = this.mealMap.get(mealObj.userName);
         
         if (mealList != null) {
@@ -75,7 +71,7 @@ export class GlobalDataService
     
     getMeals = () => {
         if (this.adminUsers.indexOf(this.currentUser) > -1) {
-            let allMeals = [];
+            let allMeals: Array<any> = [];
             this.mealMap.forEach((value, key: string) => {
                 allMeals = allMeals.concat(value);
             });
