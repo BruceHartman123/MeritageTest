@@ -1,0 +1,217 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "./font-awesome-4.7.0/css/font-awesome.min.css";
+
+body {
+    font-size: 18px;
+    background-image: url("images/smblue_rock.gif");
+}
+button:focus {
+    outline-color: red;
+}
+.logPanel {
+    display: grid;
+}
+.logFrame {
+    margin: 0 auto;
+    transform: translateX(-200px);
+    margin-top: 50px;
+    width: 400px;
+    background: #cce7f3;
+}
+.logTitle {
+    width: 100%;
+    background: #005299;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+    padding-left: 20px;
+}
+.logWords {
+    padding: 10px;
+    padding-left: 20px;
+}
+.logWords input {
+    width: 300px;
+    height: 25px;
+}
+.logWords span {
+    color: red;
+    margin-left: 10px;
+    font-size: 14px;
+}
+.link {
+    color: #1c94c4;
+    cursor: pointer;
+}
+.link:hover {
+    text-decoration: underline;
+}
+.goButton {
+    background: #008000;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+.backButton {
+    background: #c00000;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    float: right;
+    margin-right: 65px;
+}
+.mealPanel {
+    display: grid;
+}
+.mealFrame {
+    margin: 0 auto;
+    transform: translateX(-500px);
+    margin-top: 50px;
+    width: 1000px;
+    background: #cce7f3;
+}
+.mealTitle {
+    width: 1000px;
+    background: #005299;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+    padding-left: 20px;
+}
+.mealTitle span {
+    margin-left: 185px;
+}
+.mealEntry {
+    padding: 10px;
+    padding-left: 20px;
+}
+.mealHeader {
+    border: solid #005299;
+    background: #aae7f7;
+}
+.mealHeader div {
+    padding: 5px 0px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+.mealHeader div:not(:last-child) {
+    border-right: solid #005299;
+}
+.mealRow {
+    border-left: solid #005299;
+    border-right: solid #005299;
+    border-bottom: solid #005299;
+}
+.mealRow div {
+    padding: 5px 0px;
+    padding-left: 10px;    
+}
+.mealRow div:not(:last-child) {
+    border-right: solid #005299;
+}
+.mealRow:nth-child(even) {
+    background: #aae7f7;
+}
+.logoutButton {
+    background: #c00000;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    float: right;
+    margin-right: 5px;
+    font-size: 18px;
+}
+.fa {
+    cursor: pointer;
+}
+.fa-filter {
+    color: #005299;
+}
+.fa-plus {
+    color: #008000;
+    margin-left: 30px;
+}
+.fa-pencil {
+    color: #005299;
+}
+.removeMeal {
+    color: #a00000;
+    margin-left: 30px;
+}
+.fa-minus-circle {
+    color: #ff4444;
+}
+.fa-check {
+    color: lightgreen;
+}
+.confirmCaloriesIcon {
+    color: #ff8888;
+    margin-left: 15px;
+}
+.totalFrame {
+    margin: 0 auto;
+    transform: translateX(-500px);
+    margin-top: 50px;
+    width: 1000px;
+    color: white;
+}
+.totalCell {
+    background: #005299;
+    padding: 10px 10px;
+}
+.totalCell input {
+    margin-left: 5px;
+}
+.updateCalories {
+    float: right;
+    color: white;
+    margin-top: 4px;
+}
+.confirmCalories {
+    float: right;
+    margin-top: 4px;
+}
+.calorieOK {
+    color: green;
+}
+.calorieNotOK {
+    color: red;
+}
+.modifyPanel {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+.modifyFrame {
+    margin-top: 30px;
+    margin-left: 50%;
+    background: #cce7f3;
+    width: 600px;
+    height: 500px;
+    transform: translateX(-300px);
+    border: 5px solid #005299;
+}
+.modifyTitle {
+    width: 100%;
+    background: #525299;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+    padding-left: 20px;    
+}
+.filterPanel {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+.filterFrame {
+    margin-top: 30px;
+    margin-left: 50%;
+    background: #cce7f3;
+    width: 600px;
+    height: 540px;
+    transform: translateX(-300px);
+    border: 5px solid #005299;
+}
